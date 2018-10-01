@@ -11,4 +11,7 @@ import java.util.List;
 public interface VacationRepository extends PagingAndSortingRepository<Vacation, Long> {
 
     List<Vacation> findVacationsByStartDateBeforeAndEndDateAfter(Date now1, Date now2);
+
+    List<Vacation> findVacationsByEndDateAfter(Date now);
+
 }
