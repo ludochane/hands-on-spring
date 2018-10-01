@@ -1,18 +1,27 @@
 package fr.cirrus.parkingmanager.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "parkingPlace")
 public class ParkingPlace {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String numero;
 
-    @Column(name = "available")
-    private boolean available;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ParkingPlace(String numero) {
         this.numero = numero;
@@ -29,11 +38,11 @@ public class ParkingPlace {
         this.numero = numero;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public User getUser() {
+        return user;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
