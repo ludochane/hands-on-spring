@@ -9,7 +9,7 @@ Implémenter le service et refactorer le controller pour l'utiliser.
 Ou sinon copier/coller le code ci-dessous :
 
 Code de `ParkingPlaceService`:
-```
+```java
 package fr.cirrus.parkingmanager.services;
 
 import fr.cirrus.parkingmanager.models.ParkingPlace;
@@ -64,7 +64,7 @@ public class ParkingPlaceService {
 ```
 
 Code de `ParkingPlaceController`:
-```
+```java
 package fr.cirrus.parkingmanager.controllers;
 
 import fr.cirrus.parkingmanager.models.ParkingPlace;
@@ -132,7 +132,7 @@ A partir de la classe `ParkingPlaceServiceImpl`, extraire une interface que vous
 Dans la classe `ParkingPlaceController`, utiliser l'interface `ParkingPlaceService` au lieu de `ParkingPlaceServiceImpl`.
 
 Créer une classe `ParkingPlaceServiceMock` implémentant l'interface `ParkingPlaceService`. Et implémenter toutes les méthodes avec des données bouchonnées :
-```
+```java
 package fr.cirrus.parkingmanager.services;
 
 import fr.cirrus.parkingmanager.models.ParkingPlace;
@@ -229,7 +229,7 @@ Vous savez que c'est toujours une bonne pratique d'externaliser la configuration
 Par défaut, Spring utilise le fichier application.properties.
 
 Créer un répertoire `config` dans `src/main/resources`. Créer un fichier `application-mysql.properties`:
-```
+```properties
 # Datasource
 spring.datasource.url=jdbc:mysql://localhost/aliss
 spring.datasource.username=user

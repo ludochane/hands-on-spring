@@ -3,7 +3,7 @@ Pour l'instant notre application ne fait rien. Nous allons y remédier.
 
 Nous allons exposer un premier service REST qui va renvoyer la liste des places de parking que notre application est censée gérer :
 - Créer une classe `ParkingPlace` dans un package `models` avec un champ private `numero` de type String :
-```
+```java
 package fr.cirrus.parkingmanager.models;
 
 public class ParkingPlace {
@@ -24,7 +24,7 @@ public class ParkingPlace {
 ```
 
 - Créer une classe `ParkingPlaceController` dans un package `controllers` :
-```
+```java
 package fr.cirrus.parkingmanager.controllers;
 
 import fr.cirrus.parkingmanager.models.ParkingPlace;
@@ -52,8 +52,9 @@ Ce qu'on peut noter ici :
 
 - Rebuilder votre projet
 
-- Maintenant ouvrez votre navigateur à l'url `http://localhost:8080/parkingPlaces`. Vous devrez avoir :
-```
+- Maintenant ouvrez votre navigateur à l'url [http://localhost:8080/parkingPlaces](http://localhost:8080/parkingPlaces). 
+Vous devrez avoir :
+```json
 [{"numero":"1"},{"numero":"2"}]
 ```
 qui est la représentation JSON de vos données.
@@ -61,18 +62,18 @@ qui est la représentation JSON de vos données.
 ### Bonus
 - Comme @GetMapping, les annotations suivantes existent : @PostMapping, @PutMapping, @DeleteMapping 
 - Créer une nouvelle méthode dans `ParkingPlaceController` afin de récupérer une place de parking donnée :
-```
+```java
     @GetMapping("/parkingPlaces/{numero}")
     public ParkingPlace get(@PathVariable("numero") String numero) {
         return new ParkingPlace(numero);
     }
 ```
-Visitez l'url `http://localhost:8080/parkingPlaces/10`.
+Visitez l'url [http://localhost:8080/parkingPlaces/10](http://localhost:8080/parkingPlaces/10).
 
 L'annotation `@PathVariable` permet de mapper une partie de l'url avec un argument de la méthode.
 
 - Refactorer la classe `ParkingPlaceController` ainsi :
-```
+```java
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController

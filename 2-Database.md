@@ -1,7 +1,7 @@
 ## 2 - Database
 Alors pour l'instant nous renvoyons des places de parking un peu fictive. Nous allons utiliser une base de données pour persister nos données.
 - Dans le `pom.xml`, ajouter : 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -16,7 +16,7 @@ Nous allons utiliser une base de données en mémoire (H2 Database). Cela est tr
 - effectuer des tests unitaires qui ont besoin d'une base de données
 
 Rajoutez dans le `pom.xml` : 
-```
+```xml
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
@@ -24,7 +24,7 @@ Rajoutez dans le `pom.xml` :
 </dependency>
 ```
 Et dans le fichier `application.properties`, nous allons préciser l'url de connexion à la database :
-```
+```properties
 # Datasource
 spring.datasource.url=jdbc:h2:mem:testdb
 ```
@@ -39,7 +39,7 @@ qui montrent bien que JPA est dans la place (qu'un entity manager a été instan
 
 Nous allons ensuite transformer notre classe `ParkingPlace` en entité JPA. De manière simpliste, une entité JPA est mappée directement à une table SQL.
 Modifier la classe `ParkingPlace` ainsi :
-```
+```java
 @Entity
 @Table(name = "parkingPlace")
 public class ParkingPlace {
@@ -57,7 +57,7 @@ public class ParkingPlace {
 - N'oubliez pas le constructeur par défaut. JPA en a besoin.
 
 Créer le fichier `data.sql` dans le dossier `src/main/resources` :
-```
+```sql
 insert into PARKING_PLACE (numero) values (1);
 insert into PARKING_PLACE (numero) values (2);
 insert into PARKING_PLACE (numero) values (3);
@@ -69,7 +69,7 @@ Vous pouvez customiser le comportement de Spring à cet égard. Je vous renvoie 
 
 
 Il nous faut maintenant une classe permettant de requêter la base de données sur la table "parkingplace". Spring Data utilise le concept de `Repository`. Créer une interface `ParkingPlaceRepository` dans le package `repositories` :
-```
+```java
 package fr.cirrus.parkingmanager.repositories;
 
 import fr.cirrus.parkingmanager.models.ParkingPlace;
@@ -87,7 +87,7 @@ public interface ParkingPlaceRepository extends CrudRepository<ParkingPlace, Str
 
 
 Modifions à présent notre controller `ParkingPlaceController` afin d'utiliser le `ParkingPlaceRepository` :
-```
+```java
 @RestController
 @RequestMapping("/parkingPlaces")
 public class ParkingPlaceController {

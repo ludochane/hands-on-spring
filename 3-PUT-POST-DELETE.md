@@ -2,7 +2,7 @@
 Pour créer une entité, nous devons répondre au verbe HTTP `PUT`.
 
 Modifier la classe `ParkingPlaceController`, en rajoutant une méthode create :
-```
+```java
 @PutMapping
 public ParkingPlace create(@RequestBody ParkingPlace parkingPlace) {
     return this.repository.save(parkingPlace);
@@ -26,7 +26,7 @@ De la même façon, implémenter dans le controller les méthodes update() et de
 Pour la méthode update(), ajouter un champ `private boolean isAvailable;` à `ParkingPlace` et tester en updatant ce champ.
 
 Mettre à jour le fichier data.sql :
-```
+```sql
 insert into PARKING_PLACE (numero, available) values (1, true);
 insert into PARKING_PLACE (numero, available) values (2, true);
 insert into PARKING_PLACE (numero, available) values (3, true);
@@ -42,12 +42,12 @@ curl -X DELETE --header 'Content-Type: application/json' --data '{"numero": "10"
 
 ### Bonus
 Rajouter une méthode dans l'interface `ParkingPlaceRepository` pour récupérer toutes les places de parking disponibles ou non  :
-```
+```java
 List<ParkingPlace> findParkingPlacesByAvailable(boolean available);
 ```
 
 Créer un endpoint Rest dans `ParkingPlageController` : 
-```
+```java
 @GetMapping("/available/{available}")
 public List<ParkingPlace> findByAvailable(@PathVariable("available") boolean available) {
     return this.repository.findParkingPlacesByAvailable(available);
@@ -57,7 +57,7 @@ public List<ParkingPlace> findByAvailable(@PathVariable("available") boolean ava
 Recompiler le code.
 
 Tester les urls : 
-- http://localhost:8080/parkingPlaces/available/true
-- http://localhost:8080/parkingPlaces/available/false
+- [http://localhost:8080/parkingPlaces/available/true](http://localhost:8080/parkingPlaces/available/true)
+- [http://localhost:8080/parkingPlaces/available/false](http://localhost:8080/parkingPlaces/available/false)
 
 Trouvez-vous normal que cela fonctionne ?

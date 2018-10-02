@@ -8,7 +8,7 @@ Application de gestion de parking
 ## Récupérer les sources
 Cloner le repository : 
 ```
-git clone https://github...
+git clone https://github.com/ludochane/hands-on-spring.git
 ```
 
 Importer le projet dans votre éditeur préféré (IntelliJ).
