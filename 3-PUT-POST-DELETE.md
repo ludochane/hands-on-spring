@@ -1,5 +1,5 @@
 ## 3 - PUT, POST, DELETE
-Pour créer une entité, nous devons répondre au verbe HTTP `PUT`.
+Pour créer une entité, nous devons répondre au verbe HTTP `POST`.
 
 Modifier la classe `ParkingPlaceController`, en rajoutant une méthode create :
 ```java
@@ -8,14 +8,14 @@ public ParkingPlace create(@RequestBody ParkingPlace parkingPlace) {
     return this.repository.save(parkingPlace);
 }
 ```
-- L'annotation `@PutMapping` permet de répondre au verbe HTTP `PUT`
+- L'annotation `@PostMapping` permet de répondre au verbe HTTP `POST`
 - L'annotation  `@RequestBody` permet de mapper automatiquement le body de la requête HTTP à un objet Java.
 
 Recompiler votre code. Vérifier dans la console que le serveur a redémarré automatiquement.
 
-Effectuer une requête PUT. Vous pouvez utiliser `curl` ou l'application Postman (à installer) :
+Effectuer une requête POST. Vous pouvez utiliser `curl` ou l'application Postman (à installer) :
 ```
-curl -X PUT --header 'Content-Type: application/json' --data '{"numero": "11"}' localhost:8080/parkingPlaces
+curl -X POST --header 'Content-Type: application/json' --data '{"numero": "11"}' localhost:8080/parkingPlaces
 ```
 
 Vérifier que la place de parking a bien été créée.
@@ -34,8 +34,8 @@ insert into PARKING_PLACE (numero, available) values (3, true);
 
 Lorsque vous avez implémenté les méthodes update() et delete(), vous pouvez tester avec ces requêtes `curl` :
 ```
-curl -X POST --header 'Content-Type: application/json' --data '{"numero": "1", "available": false}' localhost:8080/parkingPlaces
-curl -X POST --header 'Content-Type: application/json' --data '{"numero": "1", "available": true}' localhost:8080/parkingPlaces
+curl -X PUT --header 'Content-Type: application/json' --data '{"numero": "1", "available": false}' localhost:8080/parkingPlaces
+curl -X PUT --header 'Content-Type: application/json' --data '{"numero": "1", "available": true}' localhost:8080/parkingPlaces
 
 curl -X DELETE --header 'Content-Type: application/json' --data '{"numero": "10"}' localhost:8080/parkingPlaces
 ```
