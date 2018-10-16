@@ -96,3 +96,4 @@ public class ParkingPlaceController {
 ```
 On a défini `@RequestMapping("/parkingPlaces")` directement sur la classe du controller afin d'éliminer la redondance de `/parkingPlaces` sur les méthodes.
 
+Rebuilder le projet et vérifier que tout fonctionne toujours.

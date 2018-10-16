@@ -23,6 +23,9 @@ Rajoutez dans le `pom.xml` :
     <scope>runtime</scope>
 </dependency>
 ```
+
+Si besoin, dans votre IDE, effectuer un refresh Maven.
+
 Et dans le fichier `application.properties`, nous allons préciser l'url de connexion à la database :
 ```properties
 # Datasource
@@ -40,6 +43,10 @@ qui montrent bien que JPA est dans la place (qu'un entity manager a été instan
 Nous allons ensuite transformer notre classe `ParkingPlace` en entité JPA. De manière simpliste, une entité JPA est mappée directement à une table SQL.
 Modifier la classe `ParkingPlace` ainsi :
 ```java
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
 @Table(name = "parkingPlace")
 public class ParkingPlace {
@@ -52,7 +59,7 @@ public class ParkingPlace {
     ...
 }
 ```
-- L'annotation `@Entity` permet de déclarer une entité JPA. Et nous précisons le nom de la table SQL afférente "parkingplace"
+- L'annotation `@Entity` permet de déclarer une entité JPA. Et nous précisons le nom de la table SQL afférente "parkingPlace"
 - L'annotation `@Id` déclare une primary key
 - N'oubliez pas le constructeur par défaut. JPA en a besoin.
 
@@ -62,13 +69,13 @@ insert into PARKING_PLACE (numero) values (1);
 insert into PARKING_PLACE (numero) values (2);
 insert into PARKING_PLACE (numero) values (3);
 ``` 
-Par défaut, Spring Boot va exécuter le contenu de ce fichier pour initialiser les données de la base de données.
+Par défaut, Spring Boot va exécuter le contenu de ce fichier pour initialiser les données de la base de données au démarrage de l'application.
 
 <i>Pour aller plus loin</i>
 Vous pouvez customiser le comportement de Spring à cet égard. Je vous renvoie vers la doc officielle : https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
 
 
-Il nous faut maintenant une classe permettant de requêter la base de données sur la table "parkingplace". Spring Data utilise le concept de `Repository`. Créer une interface `ParkingPlaceRepository` dans le package `repositories` :
+Il nous faut maintenant une classe permettant de requêter la base de données sur la table "PARKING_PLACE". Spring Data utilise le concept de `Repository`. Créer une interface `ParkingPlaceRepository` dans le package `repositories` :
 ```java
 package fr.cirrus.parkingmanager.repositories;
 
@@ -116,6 +123,8 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-spring
 
 ### Exercice
 Réimplémenter les méthodes de `ParkingPlaceController` en utilisant le repository.
+
+Compiler et vérifier 
 
 <i>Pour aller plus loin</i>
 Spring Data Rest ?

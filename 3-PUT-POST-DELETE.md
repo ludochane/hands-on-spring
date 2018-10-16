@@ -23,7 +23,7 @@ Vérifier que la place de parking a bien été créée.
 ### Exercice 1
 De la même façon, implémenter dans le controller les méthodes update() et delete() qui répondront aux verbes HTTP POST et DELETE respectivement.
 
-Pour la méthode update(), ajouter un champ `private boolean isAvailable;` à `ParkingPlace` et tester en updatant ce champ.
+Pour la méthode update(), ajouter un champ `private boolean available;` à `ParkingPlace` et tester en updatant ce champ.
 
 Mettre à jour le fichier data.sql :
 ```sql
@@ -32,7 +32,7 @@ insert into PARKING_PLACE (numero, available) values (2, true);
 insert into PARKING_PLACE (numero, available) values (3, true);
 ```
 
-Requêtes `curl` pour tester:
+Lorsque vous avez implémenté les méthodes update() et delete(), vous pouvez tester avec ces requêtes `curl` :
 ```
 curl -X POST --header 'Content-Type: application/json' --data '{"numero": "1", "available": false}' localhost:8080/parkingPlaces
 curl -X POST --header 'Content-Type: application/json' --data '{"numero": "1", "available": true}' localhost:8080/parkingPlaces
@@ -46,7 +46,7 @@ Rajouter une méthode dans l'interface `ParkingPlaceRepository` pour récupérer
 List<ParkingPlace> findParkingPlacesByAvailable(boolean available);
 ```
 
-Créer un endpoint Rest dans `ParkingPlageController` : 
+Créer un endpoint REST dans `ParkingPlageController` : 
 ```java
 @GetMapping("/available/{available}")
 public List<ParkingPlace> findByAvailable(@PathVariable("available") boolean available) {
@@ -61,3 +61,7 @@ Tester les urls :
 - [http://localhost:8080/parkingPlaces/available/false](http://localhost:8080/parkingPlaces/available/false)
 
 Trouvez-vous normal que cela fonctionne ?
+
+### Bonus 2
+Pour la méthode update(), vérifiez que la place de parking existe bien en base de données avant de faire l'update.
+Si la place de parking n'existe pas, renvoyez une IllegalArgumentException.

@@ -127,7 +127,7 @@ Ou peut-être que dans un deuxième temps, l'application ne va plus persister en
 Essayons.
 
 Renommer la classe `ParkingPlaceService` en `ParkingPlaceServiceImpl`.
-A partir de la classe `ParkingPlaceServiceImpl`, extraire une interface que vous nommerez `ParkingPlaceService` (Eclipse et IntelliJ devraient pouvoir le faire).
+A partir de la classe `ParkingPlaceServiceImpl`, extraire une interface que vous nommerez `ParkingPlaceService` (Eclipse et IntelliJ devraient pouvoir le faire pour vous).
 
 Dans la classe `ParkingPlaceController`, utiliser l'interface `ParkingPlaceService` au lieu de `ParkingPlaceServiceImpl`.
 
@@ -201,11 +201,9 @@ Cela signifie que Spring ne sait pas quelle implémentation injecter dans `Parki
 
 Il faut donc l'aider un peu.
 
-Et c'est lui qui nous aide en fait, en nous suggérant d'utiliser l'annotation `@Primary` ou `@Qualifier`.
-
-Alors :
+Dans les logs, Spring nous suggère d'utiliser l'annotation `@Primary` ou `@Qualifier` :
 - si on annote `ParkingPlaceServiceImpl` par `@Primary`, alors elle aura la priorité et sera injectée.
-- L'utilisation de l'annotation `@Qualifier` permet d'injecter une implémentation donnée en fonction d'un nom d'attribut précisé dans le Qualifier.
+- L'utilisation de l'annotation `@Qualifier` permet d'injecter une implémentation donnée en fonction d'un nom au lieu de laisser @Autowired faire.
 
 Il y une autre possibilité, c'est d'utiliser les <b>profils</b> Spring.
 
@@ -219,9 +217,9 @@ Testez l'url http://localhost:8080/parkingPlaces.
 Relancez votre application en passant comme argument à la JVM `-Dspring.profiles.active=default`.
 Testez l'url http://localhost:8080/parkingPlaces.
 
-Vous l'aurez compris, en fonction du profil activé lors de l'exécution de votre application, le bean correspondant sera injecté.
+En fonction du profil activé lors de l'exécution de votre application, le bean correspondant sera injecté.
 
-Du coup, dans votre éditeur préféré, vous pouvez configurer 2 exécutions différentes de votre application : une avec le profil mock, l'autre avec le profil default. Et vous n'avez pas besoin de toucher à votre code pour avoir l'un ou l'autre des comportements !
+Du coup, dans votre éditeur préféré, vous pouvez configurer 2 exécutions différentes de votre application : une avec le profil mock, l'autre avec le profil default. <b>Et vous n'avez pas besoin de toucher à votre code</b> pour avoir l'un ou l'autre des comportements.
 
 ### Bonus
 Vous savez que c'est toujours une bonne pratique d'externaliser la configuration de votre application dans les fichiers de properties.
